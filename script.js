@@ -18,28 +18,44 @@ drawerSum: for (let i=0; i<cid.length; i++) {
 
 console.log('Cash in drawer:', Number(totalCashInDrawer.toFixed(2)))
 
-const changeDue = document.getElementById('change-due');
+const changeDueDisplay = document.getElementById('change-due');
 const cashInput = document.getElementById('cash');
 const purchaseBtn = document.getElementById('purchase-btn');
 
+//submit click and enter buttons
 purchaseBtn.addEventListener('click', () => {
   processTransaction(cashInput.value);
+})
 
+cashInput.addEventListener('keydown', e => {
+  if (e.key == "Enter" || e.key == 13) {
+    processTransaction(cashInput.value);
+  }
 })
 
 function processTransaction(cash) {
-  let changeOwed = Math.abs(price - cash);
-  console.log(changeOwed);
+  let changeDue = Number(Math.abs(price - cash).toFixed(2));
+  console.log('original change due', changeDue);
 
-  if (changeOwed > totalCashInDrawer) {
-    changeDue.innerText = "Status: INSUFFICIENT_FUNDS";
+//subtract each denomination from changeDue
+  for (let i=cid.length - 1; i > 0; i--) {
+    if (cid[i][1] > 0.00 && cid[i][1] < changeDue) {
+        changeDue -= cid[i][1];
+        console.log('money taken from', cid[i][1]);
+        console.log('remaining change due', Number(changeDue.toFixed(2)));
+    }
   }
 
-  if (changeOwed == 0) {
-    changeDue.innerText = "No change due - customer paid with exact cash";
+
+  if (changeDue > totalCashInDrawer) {
+    changeDueDisplay.innerText = "Status: INSUFFICIENT_FUNDS";
   }
 
-  if (changeOwed == totalCashInDrawer) {
-    changeDue.innerText = "Status: CLOSED";
+  if (changeDue == 0) {
+    changeDueDisplay.innerText = "No change due - customer paid with exact cash";
+  }
+
+  if (changeDue == totalCashInDrawer) {
+    changeDueDisplay.innerText = "Status: CLOSED";
   }
 }
