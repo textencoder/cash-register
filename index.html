@@ -1,18 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <link rel="stylesheet" href="styles.css">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cash Register</title>
-</head>
-<body>
-    <div id="change-due"></div>
+  </head>
+  <body>
+    <div id="top">
+      <div id="empty-space">
+        <p>TEXTENCODER</p>
+        <p>2025</p>
+      </div>
+      <div id="change-due"></div>
+    </div>
 
-    <input type="number" id="cash">
+    <div id="bottom">
+      <div id="input-area">
+        <input type="number" id="cash" />
 
-    <button id="purchase-btn" type="submit">PAY</button>
-    
+        <button id="purchase-btn" type="submit">PAY</button>
+      </div>
+
+      <div id="button-area">
+        <div id="numbers">
+          <button>7</button>
+          <button>8</button>
+          <button>9</button>
+          <button>4</button>
+          <button>5</button>
+          <button>6</button>
+          <button>1</button>
+          <button>2</button>
+          <button>3</button>
+          <button>0</button>
+          <button>.</button>
+          <button>=</button>
+        </div>
+        <div id="operators">
+            <button>%</button>
+            <button>X</button>
+            <button>-</button>
+            <button>+</button>
+        </div>
+        <div id="misc">
+          <button>
+            <p>O</p>
+            <p>P</p>
+            <p>E</p>
+            <p>N</p>
+          </button>
+          <button>ON/C</button>
+          <button>OFF</button>
+        </div>
+      </div>
+    </div>
+
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
